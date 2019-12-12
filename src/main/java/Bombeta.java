@@ -5,6 +5,17 @@ public class Bombeta implements Comparable<Bombeta> {
     private int valor;
     private LocalDate data;
 
+
+    @Override
+    public int hashCode() {
+        return this.nombre.hashCode()*this.valor*this.data.hashCode();
+    }
+
+    public boolean esIgual (Bombeta b){
+        if (this.hashCode()==b.hashCode()){
+
+        }
+    }
     @Override
     public boolean equals(Object o) {
         Bombeta b = (Bombeta)o;
