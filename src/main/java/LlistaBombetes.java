@@ -1,48 +1,50 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.*;
 
 
-public class LlistaBombetes implements Iterable <Bombeta>{
-   private ArrayList<Bombeta> listaBombetas=new ArrayList<>();
+public class LlistaBombetes<E extends Comparable<E>> implements Iterable <E>{
+   private ArrayList<E> listaBombetas=new ArrayList<>();
 
 
-    public ArrayList<Bombeta> getListaBombetas() {
+    public ArrayList<E> getListaBombetas() {
         return listaBombetas;
     }
 
-    public  void addBombeta(Bombeta b){
+    public  void addBombeta(E b){
        try {
-           ExceptionDuplicat.comprobarDuplicat(listaBombetas,b);
+           comprobarDuplicat(listaBombetas,b);
            listaBombetas.add(b);
        } catch (ExceptionDuplicat exceptionDuplicat) {
            exceptionDuplicat.printStackTrace();
        }
    }
    public  void mostrarBombetes(){
-       for (Bombeta bombeta:listaBombetas) {
+       for (E bombeta:listaBombetas) {
            System.out.println(bombeta);
        }
    }
    public void ordenarBombetes(){
-       Collections.sort(listaBombetas);
+        Collections.sort(listaBombetas);
    }
    public void ordenarBombetesPerNom(){
-       Collections.sort(listaBombetas,new AlfabeticComparator());
+       Collections.sort(listaBombetas,new Comparator<E>(){
+           @Override
+           public int compare(E o1, E o2) {
+               return (o2.getNom().compareTo(o1.getNom()));
+           }
+       });
    }
    public void ordenarBombetesPerData(){
-       Collections.sort(listaBombetas,new Comparator<Bombeta>(){
+       Collections.sort(listaBombetas,new Comparator<E>(){
            @Override
-           public int compare(Bombeta o1, Bombeta o2) {
+           public int compare(E o1, E o2) {
                return (o2.getData().compareTo(o1.getData()));
            }
        });
    }
 
-    public Iterator<Bombeta> iteradorPerValor(double minVal){
+    public Iterator<E> iteradorPerValor(double minVal){
 
-       return new Iterator<Bombeta>() {
+       return new Iterator<E>() {
            int index=0;
            @Override
            public boolean hasNext() {
@@ -54,7 +56,7 @@ public class LlistaBombetes implements Iterable <Bombeta>{
                return trobat;
                }
            @Override
-           public Bombeta next() {
+           public E next() {
                index++;
                return listaBombetas.get((index)-1);
            }
@@ -62,8 +64,13 @@ public class LlistaBombetes implements Iterable <Bombeta>{
     }
 
     @Override
-    public Iterator<Bombeta> iterator() {
+    public Iterator<E> iterator() {
         return listaBombetas.iterator();
     }
-
+    public void comprobarDuplicat (ArrayList<E> lista, E b) throws ExceptionDuplicat{
+        boolean duplicat=lista.contains(b);
+        if (duplicat==true){
+            throw new ExceptionDuplicat("ELEMENT DUPLICAT "+b.toString());
+        }
+    }
 }

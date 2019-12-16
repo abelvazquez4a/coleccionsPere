@@ -12,10 +12,13 @@ public class Bombeta implements Comparable<Bombeta> {
     }
 
     public boolean esIgual (Bombeta b){
+        boolean esIgual=false;
         if (this.hashCode()==b.hashCode()){
-
+            esIgual=equals(b);
         }
+        return esIgual;
     }
+
     @Override
     public boolean equals(Object o) {
         Bombeta b = (Bombeta)o;
