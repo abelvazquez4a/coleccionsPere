@@ -2,9 +2,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class GestorColeccionables {
+public class GestorColeccionablesAmbBombetes {
     public static void main(String[] args) {
-        LlistaBombetes llistaBombetes = new LlistaBombetes();
+        ContenidorCollecionables contenidorCollecionables = new ContenidorCollecionables();
         ArrayList<Bombeta>arrayBombetes= new ArrayList<>();
         //La bombeta wellinton la añadiremos dos veces para comprobar que controlamos correctamente los duplicados.
         Bombeta wellinton = new Bombeta(10,"Wellinton", LocalDate.of(2019,1,5));
@@ -12,41 +12,40 @@ public class GestorColeccionables {
         Bombeta ana = new Bombeta(200,"Ana", LocalDate.of(2013,3,23));
         //probando la funcion "esIgual".
         System.out.println(wellinton.esIgual(new Bombeta(10,"Wellinton", LocalDate.of(2019,1,5))));
-        arrayBombetes=llistaBombetes.getListaBombetas();
-
+        arrayBombetes= contenidorCollecionables.getListaColeccionables();
         //La añadimos por primera vez.
-        llistaBombetes.addBombeta(wellinton);
+        contenidorCollecionables.addColeccionable(wellinton);
         //la volvemos a añadir, aquí tiene que petar.
-        llistaBombetes.addBombeta(wellinton);
+        contenidorCollecionables.addColeccionable(wellinton);
         //como hemos sobreescrito el equals, comprobaremos si los valores son iguales para identificar si son iguales, en este caso lo serán y por lo tanto saltará nuestra excepción.
-        llistaBombetes.addBombeta(new Bombeta (10,"Wellinton", LocalDate.of(2019,1,5)));
-        llistaBombetes.addBombeta(antonio);
-        llistaBombetes.addBombeta(ana);
+        contenidorCollecionables.addColeccionable(new Bombeta (10,"Wellinton", LocalDate.of(2019,1,5)));
+        contenidorCollecionables.addColeccionable(antonio);
+        contenidorCollecionables.addColeccionable(ana);
         System.out.println("\nArray original\n");
-        llistaBombetes.mostrarBombetes();
-        llistaBombetes.ordenarBombetes();
+        contenidorCollecionables.mostrarColeccionables();
+        contenidorCollecionables.ordenarColeccionables();
         System.out.println("\nDespués de ordenar por valor\n");
-        llistaBombetes.mostrarBombetes();
+        contenidorCollecionables.mostrarColeccionables();
         System.out.println("\nDespués de ordenar alfabéticamente\n");
-        llistaBombetes.ordenarBombetesPerNom();
-        llistaBombetes.mostrarBombetes();
+        contenidorCollecionables.ordenarColeccionablesPerNom();
+        contenidorCollecionables.mostrarColeccionables();
         System.out.println("\nDespués de ordenar por fecha\n");
-        llistaBombetes.ordenarBombetesPerData();
-        llistaBombetes.mostrarBombetes();
+        contenidorCollecionables.ordenarColeccionablesPerData();
+        contenidorCollecionables.mostrarColeccionables();
         System.out.println("\n Probando iterator\n");
-        Iterator iteratorLlistaBombetes = llistaBombetes.iterator();
+        Iterator iteratorLlistaBombetes = contenidorCollecionables.iterator();
         System.out.println("\n Con hasNext()");
         while (iteratorLlistaBombetes.hasNext()){
             System.out.println(iteratorLlistaBombetes.next());
         }
         System.out.println("\n Con For-each");
-        iteratorLlistaBombetes=llistaBombetes.iterator();
-        for (Bombeta b:llistaBombetes
+        iteratorLlistaBombetes= contenidorCollecionables.iterator();
+        for (Object b: contenidorCollecionables
              ) {
             System.out.println(iteratorLlistaBombetes.next());
         }
         System.out.println("\n Iterador per valor\n");
-        Iterator<Bombeta> iteradorPerValorMin = llistaBombetes.iteradorPerValor(500.0);
+        Iterator<Bombeta> iteradorPerValorMin = contenidorCollecionables.iteradorPerValor(500.0);
         while (iteradorPerValorMin.hasNext()){
             System.out.println(iteradorPerValorMin.next());
         }

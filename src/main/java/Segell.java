@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Bombeta implements Comparable<Bombeta>, InterfaceDataAlfabetic {
+public class Segell implements Comparable<Segell>, InterfaceDataAlfabetic {
     private String nombre;
     private int valor;
     private LocalDate data;
@@ -11,7 +11,7 @@ public class Bombeta implements Comparable<Bombeta>, InterfaceDataAlfabetic {
         return this.nombre.hashCode()*this.valor*this.data.hashCode();
     }
 
-    public boolean esIgual (Bombeta b){
+    public boolean esIgual (Segell b){
         boolean esIgual=false;
         if (this.hashCode()==b.hashCode()){
             esIgual=equals(b);
@@ -21,14 +21,14 @@ public class Bombeta implements Comparable<Bombeta>, InterfaceDataAlfabetic {
 
     @Override
     public boolean equals(Object o) {
-        Bombeta b = (Bombeta)o;
+        Segell b = (Segell)o;
         //el equals mirara si tienen el mismo nombre, el mismo valor y la misma data para decir que son iguales, si alguno de los valores no coincide, dará false, y por lo tanto
         // dirá que son diferentes.
         if (b.getNombre().equals(nombre)&&b.getValor()==valor&&b.getData().equals(data)) return true;
         else return false;
     }
 
-    public Bombeta(int valor, String nombre, LocalDate data) {
+    public Segell(int valor, String nombre, LocalDate data) {
         this.data=data;
         this.nombre=nombre;
         this.valor = valor;
@@ -48,7 +48,7 @@ public class Bombeta implements Comparable<Bombeta>, InterfaceDataAlfabetic {
 
     @Override
     public String toString() {
-        return "Bombeta{" +
+        return "Segell{" +
                 "nombre='" + nombre + '\'' +
                 ", valor=" + valor +
                 ", data=" + data +
@@ -56,7 +56,7 @@ public class Bombeta implements Comparable<Bombeta>, InterfaceDataAlfabetic {
     }
 
     @Override
-    public int compareTo(Bombeta o) {
+    public int compareTo(Segell o) {
         int resultado = 0;
         if (this.valor<o.valor) resultado=1;
         else if (this.valor>o.valor)resultado=-1;
